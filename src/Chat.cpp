@@ -1,4 +1,5 @@
 #include "Chat.hpp"
+#include <iostream>
 
 void Chat::run()
 {
@@ -58,6 +59,7 @@ void Chat::menuMain()
 
 const std::shared_ptr<User> Chat::getUserByLogin(std::string &login) const
 {
+	return nullptr;
 }
 
 void Chat::addUser(std::string& login, std::string& password, std::string& name)
@@ -94,6 +96,9 @@ void Chat::sendPublicMessage()
 
 void Chat::printStartMenu()
 {
+	std::cout << "Выбор пункта:\n" \
+		"1: Войти\n" \
+		"2: Регистрация\n";
 }
 
 void Chat::printUserMenu()
@@ -102,14 +107,20 @@ void Chat::printUserMenu()
 
 int Chat::inputMenu(int count)
 {
+	int inp;
+	std::cin >> inp;
+	if (inp > 0 && inp <= count) return inp;
+	return 0;
 }
 
 bool Chat::isValidLogin(const std::string& login ) const
 {
+	return nullptr;
 }
 
 bool Chat::isValidPassword(const std::string& password) const
 {
+	return nullptr;
 }
 
 void Chat::showUserByIndex()
@@ -118,8 +129,10 @@ void Chat::showUserByIndex()
 
 const std::shared_ptr<User> Chat::getUserByIndex(int index) const
 {
+	return nullptr;
 }
 
 bool Chat::repeat()
 {
+	return nullptr;
 }
