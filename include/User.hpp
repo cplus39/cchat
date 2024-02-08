@@ -13,7 +13,6 @@ public:
 	_login(login), _password(password), _name(name)
 	{};
 
-	void setLogin(std::string& login);
 	void setPassword(std::string& login);
 	void setName(std::string& name);
 

@@ -1,9 +1,5 @@
 #include "User.hpp"
 
-void User::setLogin(std::string& login)
-{
-}
-
 void User::setPassword(std::string& login)
 {
 }
