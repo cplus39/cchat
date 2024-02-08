@@ -1,9 +1,11 @@
 #include "Chat.hpp"
 #include <iostream>
+#include <windows.h>
+
 int main()
 {
-	std::system("chcp 1251");
-	std::system("cls");
+	SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
 	Chat chat;
 	chat.run();
 	return 0;
