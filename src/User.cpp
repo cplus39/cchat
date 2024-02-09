@@ -10,15 +10,15 @@ void User::setName(std::string& name)
 
 std::string const &User::getLogin()
 {
-	return nullptr;
+	return this->_login;
 }
 
 std::string const& User::getPassword()
 {
-	return nullptr;
+	return this->_password;
 }
 
 std::string const& User::getName()
 {
-	return nullptr;
+	return this->_name;
 }

@@ -98,7 +98,8 @@ void Chat::printStartMenu()
 {
 	std::cout << "Выбор пункта:\n" \
 		"1: Войти\n" \
-		"2: Регистрация\n";
+		"2: Регистрация\n"\
+		"0: Выход\n";
 }
 
 void Chat::printUserMenu()
