@@ -187,8 +187,8 @@ void Chat::showUserByIndex()
 	try {
 		std::cout << "\n" << getUserByIndex(index);
 	}
-	catch (OoR* ex){
-		ex->Show();
+	catch (OoR& e){
+		e.Show();
 	}
 	catch (...) {
 		std::cout << "Произошла неизвестная ошибка!\n";
