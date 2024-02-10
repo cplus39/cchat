@@ -1,10 +1,10 @@
 #include "Chat.hpp"
 
 void OoR::Show() {
-	std::cout << "Îøèáêà OutOfRange\n" \
-		<< "Ìèíèìàëüíûé: 0 - Ïîëó÷åííûé: " \
+	std::cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ  OutOfRange\n" \
+		<< "ÃŒÃ¨Ã­Ã¨Ã¬Ã Ã«Ã¼Ã­Ã»Ã©: 0 - ÃÃ®Ã«Ã³Ã·Ã¥Ã­Ã­Ã»Ã©: " \
 		<< this->_index_get << " - " \
-		<< "Ìàêñèìàëüíûé: " << this->_index_max << "\n";
+		<< "ÃŒÃ ÃªÃ±Ã¨Ã¬Ã Ã«Ã¼Ã­Ã»Ã©: " << this->_index_max << "\n";
 }
 
 
@@ -91,13 +91,13 @@ void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std:
 void Chat::signUp()
 {
 	std::string login, password, name;
-	std::cout << "Ââåäèòå ëîãèí, ñîñòîÿùèé èç íå ìåíåå âîñüìè ëàòèíñêèõ áóêâ è öèôð è áåç ïðîáåëîâ:\n" << ">>";
+	std::cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã«Ã®Ã£Ã¨Ã­, Ã±Ã®Ã±Ã²Ã®Ã¿Ã¹Ã¨Ã© Ã¨Ã§ Ã­Ã¥ Ã¬Ã¥Ã­Ã¥Ã¥ Ã¢Ã®Ã±Ã¼Ã¬Ã¨ Ã«Ã Ã²Ã¨Ã­Ã±ÃªÃ¨Ãµ Ã¡Ã³ÃªÃ¢ Ã¨ Ã¶Ã¨Ã´Ã° Ã¨ Ã¡Ã¥Ã§ Ã¯Ã°Ã®Ã¡Ã¥Ã«Ã®Ã¢:\n" << ">>";
 	getline(std::cin, login);
 
 	if (isValidLogin(login)) 
-		std::cout << "Âaø ëîãèí ïðîøåë âàëèäàöèþ\n";
+		std::cout << "Ã‚aÃ¸ Ã«Ã®Ã£Ã¨Ã­ Ã¯Ã°Ã®Ã¸Ã¥Ã« Ã¢Ã Ã«Ã¨Ã¤Ã Ã¶Ã¨Ã¾\n";
 	else 
-		std::cout << "Âaø ëîãèí íå ïðîøåë âàëèäàöèþ\n";
+		std::cout << "Ã‚aÃ¸ Ã«Ã®Ã£Ã¨Ã­ Ã­Ã¥ Ã¯Ã°Ã®Ã¸Ã¥Ã« Ã¢Ã Ã«Ã¨Ã¤Ã Ã¶Ã¨Ã¾\n";
 }
 
 void Chat::signIn()
@@ -105,6 +105,7 @@ void Chat::signIn()
 }
 
 bool Chat::isValidLogin(const std::string& login) const
+
 {	
 	if (login.length() == 8)
 	{
@@ -119,10 +120,12 @@ bool Chat::isValidLogin(const std::string& login) const
 		return true; 
 	}
 	else return false;	
+=======
 }
 
 bool Chat::isValidPassword(const std::string& password) const
 {
+
 	if (password.length() == 8)
 	{
 		for (int i{}; i < password.length(); ++i)
@@ -136,11 +139,12 @@ bool Chat::isValidPassword(const std::string& password) const
 		return true;
 	}
 	else return false;
+
 }
 
 bool Chat::isValidName(const std::string& name) const
 {
-	return nullptr; // íà ðåàëèçàöèè fentaliche
+	return nullptr; // Ã­Ã  Ã°Ã¥Ã Ã«Ã¨Ã§Ã Ã¶Ã¨Ã¨ fentaliche
 }
 
 
@@ -158,8 +162,8 @@ void Chat::showMessages()
 
 void Chat::printMessage(const std::unique_ptr<Message>& message) const
 {
-	std::cout << "Îò êîãî: " << message->getFrom() << "\n";
-	std::cout << "Òåêñò ñîîáùåíèÿ:\n" \
+	std::cout << "ÃŽÃ² ÃªÃ®Ã£Ã®: " << message->getFrom() << "\n";
+	std::cout << "Ã’Ã¥ÃªÃ±Ã² Ã±Ã®Ã®Ã¡Ã¹Ã¥Ã­Ã¨Ã¿:\n" \
 		<< message->getText() << '\n';
 }
 
@@ -167,10 +171,10 @@ void Chat::sendPrivateMessage()
 {
 	std::string login, text;
 
-	std::cout << "Ââåäèòå ëîãèí ïîëó÷àòåëÿ: ";
+	std::cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã«Ã®Ã£Ã¨Ã­ Ã¯Ã®Ã«Ã³Ã·Ã Ã²Ã¥Ã«Ã¿: ";
 	std::cin >> login;
 	if (!isValidLogin(login) && getUserByLogin(login) != nullptr) return;
-	std::cout << "\n" << "Ââåäèòå ñîîáùåíèå:\n";
+	std::cout << "\n" << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã±Ã®Ã®Ã¡Ã¹Ã¥Ã­Ã¨Ã¥:\n";
 	std::cin >> text;
 
 	addMessage(getUserByLogin(login),this->_currentUser, text);
@@ -179,7 +183,7 @@ void Chat::sendPrivateMessage()
 void Chat::sendPublicMessage()
 {
 	std::string text;
-	std::cout << "\n" << "Ââåäèòå ñîîáùåíèå:\n";
+	std::cout << "\n" << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã±Ã®Ã®Ã¡Ã¹Ã¥Ã­Ã¨Ã¥:\n";
 	std::cin >> text;
 
 	addMessage(nullptr, this->_currentUser, text);
@@ -187,20 +191,20 @@ void Chat::sendPublicMessage()
 
 void Chat::printStartMenu()
 {
-	std::cout << "Âûáîð ïóíêòà:\n" \
-		"1: Âîéòè\n" \
-		"2: Ðåãèñòðàöèÿ\n"\
-		"0: Âûõîä\n";
+	std::cout << "Ã‚Ã»Ã¡Ã®Ã° Ã¯Ã³Ã­ÃªÃ²Ã :\n" \
+		"1: Ã‚Ã®Ã©Ã²Ã¨\n" \
+		"2: ÃÃ¥Ã£Ã¨Ã±Ã²Ã°Ã Ã¶Ã¨Ã¿\n"\
+		"0: Ã‚Ã»ÃµÃ®Ã¤\n";
 }
 
 void Chat::printUserMenu()
 {
-	std::cout << "Âûáîð ïóíêòà:\n" \
-		"1: Ïîêàçàòü ñîîáùåíèÿ\n" \
-		"2: Îòïðàâèòü ëè÷íîå ñîîáùåíèå\n"\
-		"3: Îòïðàâèòü ïóáëè÷íîå ñîîáùåíèå\n"\
-		"4: Ïîêàçàòü ïîëüçîâàòåëÿ ïî èíäåêñó\n"\
-		"0: Âûõîä\n";
+	std::cout << "Ã‚Ã»Ã¡Ã®Ã° Ã¯Ã³Ã­ÃªÃ²Ã :\n" \
+		"1: ÃÃ®ÃªÃ Ã§Ã Ã²Ã¼ Ã±Ã®Ã®Ã¡Ã¹Ã¥Ã­Ã¨Ã¿\n" \
+		"2: ÃŽÃ²Ã¯Ã°Ã Ã¢Ã¨Ã²Ã¼ Ã«Ã¨Ã·Ã­Ã®Ã¥ Ã±Ã®Ã®Ã¡Ã¹Ã¥Ã­Ã¨Ã¥\n"\
+		"3: ÃŽÃ²Ã¯Ã°Ã Ã¢Ã¨Ã²Ã¼ Ã¯Ã³Ã¡Ã«Ã¨Ã·Ã­Ã®Ã¥ Ã±Ã®Ã®Ã¡Ã¹Ã¥Ã­Ã¨Ã¥\n"\
+		"4: ÃÃ®ÃªÃ Ã§Ã Ã²Ã¼ Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¿ Ã¯Ã® Ã¨Ã­Ã¤Ã¥ÃªÃ±Ã³\n"\
+		"0: Ã‚Ã»ÃµÃ®Ã¤\n";
 }
 
 int Chat::inputMenu(int count)
@@ -217,7 +221,7 @@ void Chat::showUserByIndex()
 {
 
 	int index;
-	std::cout << "Ââåäèòå èíäåêñ (÷èñëî): ";
+	std::cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã¨Ã­Ã¤Ã¥ÃªÃ± (Ã·Ã¨Ã±Ã«Ã®): ";
 	std::cin >> index;
 	try {
 		std::cout << "\n" << getUserByIndex(index);
@@ -226,7 +230,7 @@ void Chat::showUserByIndex()
 		e.Show();
 	}
 	catch (...) {
-		std::cout << "Ïðîèçîøëà íåèçâåñòíàÿ îøèáêà!\n";
+		std::cout << "ÃÃ°Ã®Ã¨Ã§Ã®Ã¸Ã«Ã  Ã­Ã¥Ã¨Ã§Ã¢Ã¥Ã±Ã²Ã­Ã Ã¿ Ã®Ã¸Ã¨Ã¡ÃªÃ !\n";
 	}
 }
 
