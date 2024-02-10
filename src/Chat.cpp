@@ -7,7 +7,6 @@ void OoR::Show() {
 		<< "ГЊГ ГЄГ±ГЁГ¬Г Г«ГјГ­Г»Г©: " << this->_index_max << "\n";
 }
 
-
 void Chat::run()
 {
 	menuStart();
@@ -211,11 +210,23 @@ int Chat::inputMenu(int count)
 {
 	int inp;
 	std::cin >> inp;
+	if (!std::cin.good()) {
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-	if (inp > 0 && inp <= count) return inp;
-	return 0;
+		std::cout << "Ошибка! Вводите только целочисленные.\n";
+		
+		return -1;
+	}
+	if (inp >= 0 && inp <= count) return inp;
+	else if (inp < 0) {
+		std::cout << "Значение меньше нуля - не допускаются.\n";
+	}
+	else {
+		std::cout << "Значения больше " << count << " не допускаються.\n";
+	}
+	return -1;
 }
-
 
 void Chat::showUserByIndex()
 {
