@@ -158,6 +158,7 @@ int Chat::inputMenu(int count)
 {
 	int inp;
 	std::cin >> inp;
+
 	if (inp > 0 && inp <= count) return inp;
 	return 0;
 }
@@ -186,8 +187,11 @@ void Chat::showUserByIndex()
 	try {
 		std::cout << "\n" << getUserByIndex(index);
 	}
-	catch (...){
-		std::cout << "Произошла неизвестная ошибка";
+	catch (OoR* ex){
+		ex->Show();
+	}
+	catch (...) {
+		std::cout << "Произошла неизвестная ошибка!\n";
 	}
 }
 
