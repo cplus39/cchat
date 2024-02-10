@@ -91,6 +91,7 @@ void Chat::signUp()
 {
 	std::string login, password, name;
 	std::cout << "Введите логин:\n" << ">>";
+
 	std::cin.get();
 	std::getline(std::cin, login);
 
@@ -137,7 +138,6 @@ void Chat::signIn()
 bool Chat::isValidLogin(const std::string& login) const
 
 {
-	std::cout << login << "\n";
 	if (login.length() >= 3)
 	{
 		if (!(getUserByLogin(login) == nullptr)) { return false;}
