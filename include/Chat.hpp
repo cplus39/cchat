@@ -1,9 +1,16 @@
 #pragma once
 
 #include "Message.hpp"
-
+#include <iostream>
 #include <vector>
 #include <memory>
+
+class OoR : public std::exception {
+	const int _index_get, _index_max;
+public:
+	OoR(const int& index_get, const int& index_max) : _index_get(index_get), _index_max(index_max) {};
+	virtual void Show();
+};
 
 class Chat
 {
@@ -37,8 +44,10 @@ class Chat
 
 	bool isValidLogin(const std::string& login) const;
 	bool isValidPassword(const std::string& password) const;
+	bool Chat::isValidName(const std::string& name) const;
 
 	bool repeat();
+	bool ValidLogin;
 
 public:
 	void run();
