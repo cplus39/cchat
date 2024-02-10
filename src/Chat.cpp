@@ -63,7 +63,8 @@ void Chat::menuMain()
 	}
 }
 
-const std::shared_ptr<User> Chat::getUserByLogin(std::string& login) const
+
+const std::shared_ptr<User> Chat::getUserByLogin(const std::string& login) const
 {
 	for (const std::shared_ptr<User>& i : this->_users) {
 		if (i->getLogin() == login) return i;
@@ -96,7 +97,37 @@ void Chat::signUp()
 	if (isValidLogin(login))
 		std::cout << "Логин прошёл верификацию\n";
 	else
+
+	{
 		std::cout << "Логин не прошёл верификацию\n";
+		return;
+	}
+
+	std::cout << "Введите Пароль:\n" << ">>";
+	std::getline(std::cin, password);
+
+	if (isValidPassword(password))
+		std::cout << "Пароль прошёл верификацию\n";
+	else
+	{
+		std::cout << "Пароль не прошёл верификацию\n";
+		return;
+	}
+
+	std::cout << "Введите имя:\n" << ">>";
+	std::getline(std::cin, name);
+
+	if (isValidName(name))
+		std::cout << "Имя прошло верификацию\n";
+	else
+	{
+		std::cout << "Имя не прошло верификацию\n";
+		return;
+	}
+
+	addUser(login, password, name);
+	this->_currentUser = getUserByLogin(login);
+	menuMain();
 }
 
 void Chat::signIn()
@@ -106,8 +137,10 @@ void Chat::signIn()
 bool Chat::isValidLogin(const std::string& login) const
 
 {
-	if (login.length() == 4)
+	std::cout << login << "\n";
+	if (login.length() >= 3)
 	{
+		if (!(getUserByLogin(login) == nullptr)) { return false;}
 		for (int i{}; i < login.length(); ++i)
 		{
 			if (login[i] < '0' ||
@@ -124,7 +157,7 @@ bool Chat::isValidLogin(const std::string& login) const
 bool Chat::isValidPassword(const std::string& password) const
 {
 
-	if (password.length() == 4)
+	if (password.length() >= 3)
 	{
 		for (int i{}; i < password.length(); ++i)
 		{
@@ -142,7 +175,19 @@ bool Chat::isValidPassword(const std::string& password) const
 
 bool Chat::isValidName(const std::string& name) const
 {
-	return nullptr; // на реализации fentaliche
+	if (name.length() >= 3)
+	{
+		for (int i{}; i < name.length(); ++i)
+		{
+			if (name[i] < '0' ||
+				name[i] > '9' && name[i] < 'A' ||
+				name[i] > 'Z' && name[i] < 'a' ||
+				name[i] > 'z')
+				return false;
+		}
+		return true;
+	}
+	else return false;
 }
 
 
@@ -160,7 +205,7 @@ void Chat::showMessages()
 
 void Chat::printMessage(const std::unique_ptr<Message>& message) const
 {
-	std::cout << "От кого: " << message->getFrom() << "\n";
+	std::cout << "От кого: " << message->getFrom()->getName() << "\n";
 	std::cout << "Текст сообщения:\n" \
 		<< message->getText() << '\n';
 }
@@ -173,7 +218,11 @@ void Chat::sendPrivateMessage()
 	std::cin >> login;
 	if (!isValidLogin(login) && getUserByLogin(login) != nullptr) return;
 	std::cout << "\n" << "Введите сообщение:\n";
-	std::cin >> text;
+
+
+	std::cin.get();
+	std::getline(std::cin, text);
+	text += ('\n');
 
 	addMessage(getUserByLogin(login), this->_currentUser, text);
 }
@@ -182,8 +231,10 @@ void Chat::sendPublicMessage()
 {
 	std::string text;
 	std::cout << "\n" << "Введите сообщение:\n";
-	std::cin >> text;
-
+  
+	std::cin.get();
+	std::getline(std::cin, text);
+	text+=('\n');
 	addMessage(nullptr, this->_currentUser, text);
 }
 
@@ -214,7 +265,6 @@ int Chat::inputMenu(int count)
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 		std::cout << "Ошибка! Вводите только целочисленные.\n";
-
 		return -1;
 	}
 	if (inp >= 0 && inp <= count) return inp;
@@ -244,7 +294,7 @@ void Chat::showUserByIndex()
 	}
 }
 
-const std::shared_ptr<User> Chat::getUserByIndex(int index) const
+const std::shared_ptr<User> Chat::getUserByIndex(const int index) const
 {
 	if (index < 0 || index >= this->_users.size()) throw OoR(index, this->_users.size());
 	return this->_users.at(index);
