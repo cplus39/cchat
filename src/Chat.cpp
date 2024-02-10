@@ -175,10 +175,15 @@ int Chat::inputMenu(int count)
 	int inp;
 	std::cin >> inp;
 
-	if (inp > 0 && inp <= count) return inp;
-	return 0;
+	if (inp >= 0 && inp <= count) return inp;
+	else if (inp < 0) {
+		std::cout << "Значение меньше нуля - не допускаются.\n";
+	}
+	else {
+		std::cout << "Значения больше " << count << " не допускаються.\n";
+	}
+	return -1;
 }
-
 
 void Chat::showUserByIndex()
 {
