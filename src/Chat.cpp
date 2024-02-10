@@ -59,7 +59,7 @@ void Chat::menuMain()
 
 const std::shared_ptr<User> Chat::getUserByLogin(std::string &login) const
 {
-	for (std::shared_ptr<User> i : this->_users) {
+	for (const std::shared_ptr<User>& i : this->_users) {
 		if (i->getLogin() == login) return i;
 	}
 	return nullptr;
@@ -68,7 +68,7 @@ const std::shared_ptr<User> Chat::getUserByLogin(std::string &login) const
 void Chat::addUser(std::string& login, std::string& password, std::string& name)
 {
 	if (isValidLogin(login) && isValidPassword(password) && isValidName(name)) {
-		this->_users.emplace_back(std::make_shared<User>(User(login, password, name)));
+		this->_users.emplace_back(login, password, name);
 	}
 	else {
 		repeat();
@@ -77,6 +77,7 @@ void Chat::addUser(std::string& login, std::string& password, std::string& name)
 
 void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std::string &text)
 {
+	this->_messages.emplace_back(to, from, text);
 }
 
 void Chat::signUp()
@@ -89,18 +90,43 @@ void Chat::signIn()
 
 void Chat::showMessages()
 {
+	for (const std::unique_ptr<Message>& i : this->_messages) {
+		if (i->getTo() == this->_currentUser || i->getTo() == nullptr) {
+			printMessage(i);
+		}
+		else {
+			continue;
+		}
+	}
 }
 
 void Chat::printMessage(const std::unique_ptr<Message>& message) const
 {
+	std::cout << "От кого: " << message->getFrom() << "\n";
+	std::cout << "Текст сообщения:\n" \
+		<< message->getText() << '\n';
 }
 
 void Chat::sendPrivateMessage()
 {
+	std::string login, text;
+
+	std::cout << "Введите логин получателя: ";
+	std::cin >> login;
+	if (!isValidLogin(login) && getUserByLogin(login) != nullptr) return;
+	std::cout << "\n" << "Введите сообщение:\n";
+	std::cin >> text;
+
+	this->_messages.emplace_back(getUserByLogin(login),this->_currentUser, text);
 }
 
 void Chat::sendPublicMessage()
 {
+	std::string text;
+	std::cout << "\n" << "Введите сообщение:\n";
+	std::cin >> text;
+
+	this->_messages.emplace_back(nullptr, this->_currentUser, text);
 }
 
 void Chat::printStartMenu()
