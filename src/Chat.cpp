@@ -95,6 +95,22 @@ void Chat::signIn()
 {
 }
 
+bool Chat::isValidLogin(const std::string& login) const
+{
+	return nullptr; // на реализации fentaliche
+}
+
+bool Chat::isValidPassword(const std::string& password) const
+{
+	return nullptr; // на реализации fentaliche
+}
+
+bool Chat::isValidName(const std::string& name) const
+{
+	return nullptr; // на реализации fentaliche
+}
+
+
 void Chat::showMessages()
 {
 	for (const std::unique_ptr<Message>& i : this->_messages) {
@@ -163,20 +179,6 @@ int Chat::inputMenu(int count)
 	return 0;
 }
 
-bool Chat::isValidLogin(const std::string& login ) const
-{
-	return nullptr; // на реализации fentaliche
-}
-
-bool Chat::isValidPassword(const std::string& password) const
-{
-	return nullptr; // на реализации fentaliche
-}
-
-bool Chat::isValidName(const std::string& name) const
-{
-	return nullptr; // на реализации fentaliche
-}
 
 void Chat::showUserByIndex()
 {
