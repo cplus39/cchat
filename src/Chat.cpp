@@ -174,7 +174,14 @@ int Chat::inputMenu(int count)
 {
 	int inp;
 	std::cin >> inp;
+	if (!std::cin.good()) {
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
+		std::cout << "Ошибка! Вводите только целочисленные.\n";
+		
+		return -1;
+	}
 	if (inp >= 0 && inp <= count) return inp;
 	else if (inp < 0) {
 		std::cout << "Значение меньше нуля - не допускаются.\n";
