@@ -22,8 +22,8 @@ class Chat
 	void menuStart();
 	void menuMain();
 
-	const std::shared_ptr<User> getUserByLogin(std::string& login) const;
-	const std::shared_ptr<User> getUserByIndex(int index) const noexcept(false);
+	const std::shared_ptr<User> getUserByLogin(const std::string& login) const;
+	const std::shared_ptr<User> getUserByIndex(const int index) const noexcept(false);
 	void showUserByIndex();
 
 	void addUser(std::string& login, std::string& password, std::string& name);
