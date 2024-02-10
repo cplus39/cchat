@@ -1,10 +1,10 @@
-#include "Chat.hpp"
+﻿#include "Chat.hpp"
 
 void OoR::Show() {
-	std::cout << "Îøèáêà OutOfRange\n" \
-		<< "Ìèíèìàëüíûé: 0 - Ïîëó÷åííûé: " \
+	std::cout << "Ошибка OutOfRange\n" \
+		<< "Минимальный: 0 - Полученный: " \
 		<< this->_index_get << " - " \
-		<< "Ìàêñèìàëüíûé: " << this->_index_max << "\n";
+		<< "Максимальный: " << this->_index_max << "\n";
 }
 
 void Chat::run()
@@ -24,7 +24,6 @@ void Chat::menuStart()
 			signIn();
 			break;
 		case 2:
-			std::cin.get();
 			signUp();
 			break;
 		case 0:
@@ -64,7 +63,7 @@ void Chat::menuMain()
 	}
 }
 
-const std::shared_ptr<User> Chat::getUserByLogin(std::string &login) const
+const std::shared_ptr<User> Chat::getUserByLogin(std::string& login) const
 {
 	for (const std::shared_ptr<User>& i : this->_users) {
 		if (i->getLogin() == login) return i;
@@ -82,7 +81,7 @@ void Chat::addUser(std::string& login, std::string& password, std::string& name)
 	}
 }
 
-void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std::string &text)
+void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std::string& text)
 {
 	this->_messages.emplace_back(std::make_unique<Message>(to, from, text));
 }
@@ -90,13 +89,13 @@ void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std:
 void Chat::signUp()
 {
 	std::string login, password, name;
-	std::cout << "Ââåäèòå ëîãèí, ñîñòîÿùèé èç íå ìåíåå âîñüìè ëàòèíñêèõ áóêâ è öèôð è áåç ïðîáåëîâ:\n" << ">>";
-	getline(std::cin, login);
+	std::cout << "Введите логин:\n" << ">>";
+	std::cin >> login;
 
-	if (isValidLogin(login)) 
-		std::cout << "Âaø ëîãèí ïðîøåë âàëèäàöèþ\n";
-	else 
-		std::cout << "Âaø ëîãèí íå ïðîøåë âàëèäàöèþ\n";
+	if (isValidLogin(login))
+		std::cout << "Логин прошёл верификацию\n";
+	else
+		std::cout << "Логин не прошёл верификацию\n";
 }
 
 void Chat::signIn()
@@ -105,7 +104,7 @@ void Chat::signIn()
 
 bool Chat::isValidLogin(const std::string& login) const
 
-{	
+{
 	if (login.length() == 8)
 	{
 		for (int i{}; i < login.length(); ++i)
@@ -116,10 +115,9 @@ bool Chat::isValidLogin(const std::string& login) const
 				login[i] > 'z')
 				return false;
 		}
-		return true; 
+		return true;
 	}
-	else return false;	
-=======
+	else return false;
 }
 
 bool Chat::isValidPassword(const std::string& password) const
@@ -143,7 +141,7 @@ bool Chat::isValidPassword(const std::string& password) const
 
 bool Chat::isValidName(const std::string& name) const
 {
-	return nullptr; // íà ðåàëèçàöèè fentaliche
+	return nullptr; // на реализации fentaliche
 }
 
 
@@ -161,8 +159,8 @@ void Chat::showMessages()
 
 void Chat::printMessage(const std::unique_ptr<Message>& message) const
 {
-	std::cout << "Îò êîãî: " << message->getFrom() << "\n";
-	std::cout << "Òåêñò ñîîáùåíèÿ:\n" \
+	std::cout << "От кого: " << message->getFrom() << "\n";
+	std::cout << "Текст сообщения:\n" \
 		<< message->getText() << '\n';
 }
 
@@ -170,19 +168,19 @@ void Chat::sendPrivateMessage()
 {
 	std::string login, text;
 
-	std::cout << "Ââåäèòå ëîãèí ïîëó÷àòåëÿ: ";
+	std::cout << "Введите логин получателя: ";
 	std::cin >> login;
 	if (!isValidLogin(login) && getUserByLogin(login) != nullptr) return;
-	std::cout << "\n" << "Ââåäèòå ñîîáùåíèå:\n";
+	std::cout << "\n" << "Введите сообщение:\n";
 	std::cin >> text;
 
-	addMessage(getUserByLogin(login),this->_currentUser, text);
+	addMessage(getUserByLogin(login), this->_currentUser, text);
 }
 
 void Chat::sendPublicMessage()
 {
 	std::string text;
-	std::cout << "\n" << "Ââåäèòå ñîîáùåíèå:\n";
+	std::cout << "\n" << "Введите сообщение:\n";
 	std::cin >> text;
 
 	addMessage(nullptr, this->_currentUser, text);
@@ -190,20 +188,20 @@ void Chat::sendPublicMessage()
 
 void Chat::printStartMenu()
 {
-	std::cout << "Âûáîð ïóíêòà:\n" \
-		"1: Âîéòè\n" \
-		"2: Ðåãèñòðàöèÿ\n"\
-		"0: Âûõîä\n";
+	std::cout << "Выбор пункта:\n" \
+		"1: Войти\n" \
+		"2: Регистрация\n"\
+		"0: Выход\n";
 }
 
 void Chat::printUserMenu()
 {
-	std::cout << "Âûáîð ïóíêòà:\n" \
-		"1: Ïîêàçàòü ñîîáùåíèÿ\n" \
-		"2: Îòïðàâèòü ëè÷íîå ñîîáùåíèå\n"\
-		"3: Îòïðàâèòü ïóáëè÷íîå ñîîáùåíèå\n"\
-		"4: Ïîêàçàòü ïîëüçîâàòåëÿ ïî èíäåêñó\n"\
-		"0: Âûõîä\n";
+	std::cout << "Выбор пункта:\n" \
+		"1: Показать сообщения\n" \
+		"2: Отправить личное сообщение\n"\
+		"3: Отправить публичное сообщение\n"\
+		"4: Показать пользователя по индексу\n"\
+		"0: Выход\n";
 }
 
 int Chat::inputMenu(int count)
@@ -214,16 +212,16 @@ int Chat::inputMenu(int count)
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-		std::cout << "������! ������� ������ �������������.\n";
-		
+		std::cout << "Ошибка! Вводите только целочисленные.\n";
+
 		return -1;
 	}
 	if (inp >= 0 && inp <= count) return inp;
 	else if (inp < 0) {
-		std::cout << "�������� ������ ���� - �� �����������.\n";
+		std::cout << "Значение меньше нуля - не допускаются.\n";
 	}
 	else {
-		std::cout << "�������� ������ " << count << " �� ������������.\n";
+		std::cout << "Значения больше " << count << " не допускаються.\n";
 	}
 	return -1;
 }
@@ -232,16 +230,16 @@ void Chat::showUserByIndex()
 {
 
 	int index;
-	std::cout << "Ââåäèòå èíäåêñ (÷èñëî): ";
+	std::cout << "Введите индекс (число): ";
 	std::cin >> index;
 	try {
 		std::cout << "\n" << getUserByIndex(index);
 	}
-	catch (OoR& e){
+	catch (OoR& e) {
 		e.Show();
 	}
 	catch (...) {
-		std::cout << "Ïðîèçîøëà íåèçâåñòíàÿ îøèáêà!\n";
+		std::cout << "Произошла неизвестная ошибка!\n";
 	}
 }
 
