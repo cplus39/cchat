@@ -1,5 +1,5 @@
 #include "User.hpp"
-#include "Chat.hpp"
+
 
 void User::setPassword(std::string& login)
 {
