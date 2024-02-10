@@ -90,7 +90,8 @@ void Chat::signUp()
 {
 	std::string login, password, name;
 	std::cout << "Введите логин:\n" << ">>";
-	std::cin >> login;
+	std::cin.get();
+	std::getline(std::cin, login);
 
 	if (isValidLogin(login))
 		std::cout << "Логин прошёл верификацию\n";
@@ -105,7 +106,7 @@ void Chat::signIn()
 bool Chat::isValidLogin(const std::string& login) const
 
 {
-	if (login.length() == 8)
+	if (login.length() == 4)
 	{
 		for (int i{}; i < login.length(); ++i)
 		{
@@ -123,7 +124,7 @@ bool Chat::isValidLogin(const std::string& login) const
 bool Chat::isValidPassword(const std::string& password) const
 {
 
-	if (password.length() == 8)
+	if (password.length() == 4)
 	{
 		for (int i{}; i < password.length(); ++i)
 		{
