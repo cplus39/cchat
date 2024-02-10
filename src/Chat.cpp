@@ -102,7 +102,6 @@ void Chat::signUp()
 	}
 
 	std::cout << "¬ведите ѕароль:\n" << ">>";
-	std::cin.get();
 	std::getline(std::cin, password);
 
 	if (isValidPassword(password))
@@ -114,7 +113,6 @@ void Chat::signUp()
 	}
 
 	std::cout << "¬ведите им€:\n" << ">>";
-	std::cin.get();
 	std::getline(std::cin, name);
 
 	if (isValidName(name))
