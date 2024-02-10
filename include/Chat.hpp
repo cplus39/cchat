@@ -47,6 +47,7 @@ class Chat
 	bool Chat::isValidName(const std::string& name) const;
 
 	bool repeat();
+	bool ValidLogin;
 
 public:
 	void run();

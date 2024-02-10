@@ -1,10 +1,10 @@
 #include "Chat.hpp"
 
 void OoR::Show() {
-	std::cout << "Ошибка OutOfRange\n" \
-		<< "Минимальный: 0 - Полученный: " \
+	std::cout << "ГЋГёГЁГЎГЄГ  OutOfRange\n" \
+		<< "ГЊГЁГ­ГЁГ¬Г Г«ГјГ­Г»Г©: 0 - ГЏГ®Г«ГіГ·ГҐГ­Г­Г»Г©: " \
 		<< this->_index_get << " - " \
-		<< "Максимальный: " << this->_index_max << "\n";
+		<< "ГЊГ ГЄГ±ГЁГ¬Г Г«ГјГ­Г»Г©: " << this->_index_max << "\n";
 }
 
 
@@ -25,6 +25,7 @@ void Chat::menuStart()
 			signIn();
 			break;
 		case 2:
+			std::cin.get();
 			signUp();
 			break;
 		case 0:
@@ -89,6 +90,14 @@ void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std:
 
 void Chat::signUp()
 {
+	std::string login, password, name;
+	std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г«Г®ГЈГЁГ­, Г±Г®Г±ГІГ®ГїГ№ГЁГ© ГЁГ§ Г­ГҐ Г¬ГҐГ­ГҐГҐ ГўГ®Г±ГјГ¬ГЁ Г«Г ГІГЁГ­Г±ГЄГЁГµ ГЎГіГЄГў ГЁ Г¶ГЁГґГ° ГЁ ГЎГҐГ§ ГЇГ°Г®ГЎГҐГ«Г®Гў:\n" << ">>";
+	getline(std::cin, login);
+
+	if (isValidLogin(login)) 
+		std::cout << "Г‚aГё Г«Г®ГЈГЁГ­ ГЇГ°Г®ГёГҐГ« ГўГ Г«ГЁГ¤Г Г¶ГЁГѕ\n";
+	else 
+		std::cout << "Г‚aГё Г«Г®ГЈГЁГ­ Г­ГҐ ГЇГ°Г®ГёГҐГ« ГўГ Г«ГЁГ¤Г Г¶ГЁГѕ\n";
 }
 
 void Chat::signIn()
@@ -96,18 +105,46 @@ void Chat::signIn()
 }
 
 bool Chat::isValidLogin(const std::string& login) const
-{
-	return nullptr; // на реализации fentaliche
+
+{	
+	if (login.length() == 8)
+	{
+		for (int i{}; i < login.length(); ++i)
+		{
+			if (login[i] < '0' ||
+				login[i] > '9' && login[i] < 'A' ||
+				login[i] > 'Z' && login[i] < 'a' ||
+				login[i] > 'z')
+				return false;
+		}
+		return true; 
+	}
+	else return false;	
+=======
 }
 
 bool Chat::isValidPassword(const std::string& password) const
 {
-	return nullptr; // на реализации fentaliche
+
+	if (password.length() == 8)
+	{
+		for (int i{}; i < password.length(); ++i)
+		{
+			if (password[i] < '0' ||
+				password[i] > '9' && password[i] < 'A' ||
+				password[i] > 'Z' && password[i] < 'a' ||
+				password[i] > 'z')
+				return false;
+		}
+		return true;
+	}
+	else return false;
+
 }
 
 bool Chat::isValidName(const std::string& name) const
 {
-	return nullptr; // на реализации fentaliche
+	return nullptr; // Г­Г  Г°ГҐГ Г«ГЁГ§Г Г¶ГЁГЁ fentaliche
 }
 
 
@@ -125,8 +162,8 @@ void Chat::showMessages()
 
 void Chat::printMessage(const std::unique_ptr<Message>& message) const
 {
-	std::cout << "От кого: " << message->getFrom() << "\n";
-	std::cout << "Текст сообщения:\n" \
+	std::cout << "ГЋГІ ГЄГ®ГЈГ®: " << message->getFrom() << "\n";
+	std::cout << "Г’ГҐГЄГ±ГІ Г±Г®Г®ГЎГ№ГҐГ­ГЁГї:\n" \
 		<< message->getText() << '\n';
 }
 
@@ -134,10 +171,10 @@ void Chat::sendPrivateMessage()
 {
 	std::string login, text;
 
-	std::cout << "Введите логин получателя: ";
+	std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г«Г®ГЈГЁГ­ ГЇГ®Г«ГіГ·Г ГІГҐГ«Гї: ";
 	std::cin >> login;
 	if (!isValidLogin(login) && getUserByLogin(login) != nullptr) return;
-	std::cout << "\n" << "Введите сообщение:\n";
+	std::cout << "\n" << "Г‚ГўГҐГ¤ГЁГІГҐ Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ:\n";
 	std::cin >> text;
 
 	addMessage(getUserByLogin(login),this->_currentUser, text);
@@ -146,7 +183,7 @@ void Chat::sendPrivateMessage()
 void Chat::sendPublicMessage()
 {
 	std::string text;
-	std::cout << "\n" << "Введите сообщение:\n";
+	std::cout << "\n" << "Г‚ГўГҐГ¤ГЁГІГҐ Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ:\n";
 	std::cin >> text;
 
 	addMessage(nullptr, this->_currentUser, text);
@@ -154,20 +191,20 @@ void Chat::sendPublicMessage()
 
 void Chat::printStartMenu()
 {
-	std::cout << "Выбор пункта:\n" \
-		"1: Войти\n" \
-		"2: Регистрация\n"\
-		"0: Выход\n";
+	std::cout << "Г‚Г»ГЎГ®Г° ГЇГіГ­ГЄГІГ :\n" \
+		"1: Г‚Г®Г©ГІГЁ\n" \
+		"2: ГђГҐГЈГЁГ±ГІГ°Г Г¶ГЁГї\n"\
+		"0: Г‚Г»ГµГ®Г¤\n";
 }
 
 void Chat::printUserMenu()
 {
-	std::cout << "Выбор пункта:\n" \
-		"1: Показать сообщения\n" \
-		"2: Отправить личное сообщение\n"\
-		"3: Отправить публичное сообщение\n"\
-		"4: Показать пользователя по индексу\n"\
-		"0: Выход\n";
+	std::cout << "Г‚Г»ГЎГ®Г° ГЇГіГ­ГЄГІГ :\n" \
+		"1: ГЏГ®ГЄГ Г§Г ГІГј Г±Г®Г®ГЎГ№ГҐГ­ГЁГї\n" \
+		"2: ГЋГІГЇГ°Г ГўГЁГІГј Г«ГЁГ·Г­Г®ГҐ Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ\n"\
+		"3: ГЋГІГЇГ°Г ГўГЁГІГј ГЇГіГЎГ«ГЁГ·Г­Г®ГҐ Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ\n"\
+		"4: ГЏГ®ГЄГ Г§Г ГІГј ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї ГЇГ® ГЁГ­Г¤ГҐГЄГ±Гі\n"\
+		"0: Г‚Г»ГµГ®Г¤\n";
 }
 
 int Chat::inputMenu(int count)
@@ -184,7 +221,7 @@ void Chat::showUserByIndex()
 {
 
 	int index;
-	std::cout << "Введите индекс (число): ";
+	std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГЁГ­Г¤ГҐГЄГ± (Г·ГЁГ±Г«Г®): ";
 	std::cin >> index;
 	try {
 		std::cout << "\n" << getUserByIndex(index);
@@ -193,7 +230,7 @@ void Chat::showUserByIndex()
 		e.Show();
 	}
 	catch (...) {
-		std::cout << "Произошла неизвестная ошибка!\n";
+		std::cout << "ГЏГ°Г®ГЁГ§Г®ГёГ«Г  Г­ГҐГЁГ§ГўГҐГ±ГІГ­Г Гї Г®ГёГЁГЎГЄГ !\n";
 	}
 }
 
