@@ -63,6 +63,7 @@ void Chat::menuMain()
 	}
 }
 
+
 const std::shared_ptr<User> Chat::getUserByLogin(const std::string& login) const
 {
 	for (const std::shared_ptr<User>& i : this->_users) {
@@ -81,7 +82,7 @@ void Chat::addUser(std::string& login, std::string& password, std::string& name)
 	}
 }
 
-void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std::string &text)
+void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std::string& text)
 {
 	this->_messages.emplace_back(std::make_unique<Message>(to, from, text));
 }
@@ -96,6 +97,7 @@ void Chat::signUp()
 	if (isValidLogin(login))
 		std::cout << "Логин прошёл верификацию\n";
 	else
+
 	{
 		std::cout << "Логин не прошёл верификацию\n";
 		return;
@@ -139,7 +141,6 @@ bool Chat::isValidLogin(const std::string& login) const
 	if (login.length() >= 3)
 	{
 		if (!(getUserByLogin(login) == nullptr)) { return false;}
-
 		for (int i{}; i < login.length(); ++i)
 		{
 			if (login[i] < '0' ||
@@ -218,9 +219,11 @@ void Chat::sendPrivateMessage()
 	if (!isValidLogin(login) && getUserByLogin(login) != nullptr) return;
 	std::cout << "\n" << "Введите сообщение:\n";
 
+
 	std::cin.get();
 	std::getline(std::cin, text);
 	text += ('\n');
+
 	addMessage(getUserByLogin(login), this->_currentUser, text);
 }
 
@@ -228,6 +231,7 @@ void Chat::sendPublicMessage()
 {
 	std::string text;
 	std::cout << "\n" << "Введите сообщение:\n";
+  
 	std::cin.get();
 	std::getline(std::cin, text);
 	text+=('\n');
@@ -261,7 +265,6 @@ int Chat::inputMenu(int count)
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 		std::cout << "Ошибка! Вводите только целочисленные.\n";
-		
 		return -1;
 	}
 	if (inp >= 0 && inp <= count) return inp;
@@ -283,7 +286,7 @@ void Chat::showUserByIndex()
 	try {
 		std::cout << "\n" << getUserByIndex(index);
 	}
-	catch (OoR& e){
+	catch (OoR& e) {
 		e.Show();
 	}
 	catch (...) {
