@@ -7,7 +7,6 @@ void OoR::Show() {
 		<< "Максимальный: " << this->_index_max << "\n";
 }
 
-
 void Chat::run()
 {
 	menuStart();
