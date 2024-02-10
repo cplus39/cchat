@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Message.hpp"
-
+#include <iostream>
 #include <vector>
 #include <memory>
 
@@ -37,6 +37,7 @@ class Chat
 
 	bool isValidLogin(const std::string& login) const;
 	bool isValidPassword(const std::string& password) const;
+	bool Chat::isValidName(const std::string& name) const;
 
 	bool repeat();
 

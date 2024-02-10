@@ -1,5 +1,5 @@
 #include "Chat.hpp"
-#include <iostream>
+
 
 void Chat::run()
 {
@@ -59,11 +59,20 @@ void Chat::menuMain()
 
 const std::shared_ptr<User> Chat::getUserByLogin(std::string &login) const
 {
+	for (std::shared_ptr<User> i : this->_users) {
+		if (i->getLogin() == login) return i;
+	}
 	return nullptr;
 }
 
 void Chat::addUser(std::string& login, std::string& password, std::string& name)
 {
+	if (isValidLogin(login) && isValidPassword(password) && isValidName(name)) {
+		this->_users.emplace_back(std::make_shared<User>(User(login, password, name)));
+	}
+	else {
+		repeat();
+	}
 }
 
 void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std::string &text)
@@ -120,6 +129,11 @@ bool Chat::isValidLogin(const std::string& login ) const
 }
 
 bool Chat::isValidPassword(const std::string& password) const
+{
+	return nullptr;
+}
+
+bool Chat::isValidName(const std::string& name) const
 {
 	return nullptr;
 }
