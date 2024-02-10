@@ -1,5 +1,12 @@
 #include "Chat.hpp"
 
+void OoR::Show() {
+	std::cout << "Ошибка OutOfRange\n" \
+		<< "Минимальный: 0 - Полученный: " \
+		<< this->_index_get << " - " \
+		<< "Максимальный: " << this->_index_max << "\n";
+}
+
 
 void Chat::run()
 {
@@ -176,14 +183,18 @@ void Chat::showUserByIndex()
 	int index;
 	std::cout << "Введите индекс (число): ";
 	std::cin >> index;
-
-	std::cout << "\n" << getUserByIndex(index);
-
+	try {
+		std::cout << "\n" << getUserByIndex(index);
+	}
+	catch (...){
+		std::cout << "Произошла неизвестная ошибка";
+	}
 }
 
 const std::shared_ptr<User> Chat::getUserByIndex(int index) const
 {
-	return nullptr;
+	if (index < 0 || index >= this->_users.size()) throw OoR(index, this->_users.size());
+	return this->_users.at(index);
 }
 
 bool Chat::repeat()

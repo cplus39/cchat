@@ -5,6 +5,13 @@
 #include <vector>
 #include <memory>
 
+class OoR : public std::exception {
+	const int _index_get, _index_max;
+public:
+	OoR(const int& index_get, const int& index_max) : _index_get(index_get), _index_max(index_max) {};
+	virtual void Show();
+};
+
 class Chat
 {
 	std::vector <std::shared_ptr<User>> _users;
