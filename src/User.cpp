@@ -3,12 +3,12 @@
 
 void User::setPassword(std::string& login)
 {
-
+	// сюда вернёмся потом - когда будет ответ по Check-Valid
 }
 
 void User::setName(std::string& name)
 {
-
+	// сюда вернёмся потом - когда будет ответ по Check-Valid
 }
 
 std::string const &User::getLogin()

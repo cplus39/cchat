@@ -68,7 +68,7 @@ const std::shared_ptr<User> Chat::getUserByLogin(std::string &login) const
 void Chat::addUser(std::string& login, std::string& password, std::string& name)
 {
 	if (isValidLogin(login) && isValidPassword(password) && isValidName(name)) {
-		this->_users.emplace_back(login, password, name);
+		this->_users.emplace_back(std::make_shared<User>(login, password, name));
 	}
 	else {
 		repeat();
@@ -77,7 +77,7 @@ void Chat::addUser(std::string& login, std::string& password, std::string& name)
 
 void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std::string &text)
 {
-	this->_messages.emplace_back(to, from, text);
+	this->_messages.emplace_back(std::make_unique<Message>(to, from, text));
 }
 
 void Chat::signUp()
@@ -117,7 +117,7 @@ void Chat::sendPrivateMessage()
 	std::cout << "\n" << "¬ведите сообщение:\n";
 	std::cin >> text;
 
-	this->_messages.emplace_back(getUserByLogin(login),this->_currentUser, text);
+	addMessage(getUserByLogin(login),this->_currentUser, text);
 }
 
 void Chat::sendPublicMessage()
@@ -126,7 +126,7 @@ void Chat::sendPublicMessage()
 	std::cout << "\n" << "¬ведите сообщение:\n";
 	std::cin >> text;
 
-	this->_messages.emplace_back(nullptr, this->_currentUser, text);
+	addMessage(nullptr, this->_currentUser, text);
 }
 
 void Chat::printStartMenu()
@@ -157,21 +157,28 @@ int Chat::inputMenu(int count)
 
 bool Chat::isValidLogin(const std::string& login ) const
 {
-	return nullptr;
+	return nullptr; // на реализации fentaliche
 }
 
 bool Chat::isValidPassword(const std::string& password) const
 {
-	return nullptr;
+	return nullptr; // на реализации fentaliche
 }
 
 bool Chat::isValidName(const std::string& name) const
 {
-	return nullptr;
+	return nullptr; // на реализации fentaliche
 }
 
 void Chat::showUserByIndex()
 {
+
+	int index;
+	std::cout << "¬ведите индекс (число): ";
+	std::cin >> index;
+
+	std::cout << "\n" << getUserByIndex(index);
+
 }
 
 const std::shared_ptr<User> Chat::getUserByIndex(int index) const
