@@ -94,7 +94,7 @@ void Chat::signUp()
 
 	std::getline(std::cin >> std::ws, login);
 
-	if (isValidLogin(login))
+	if (isValidLogin(login) && getUserByLogin(login) == nullptr)
 		std::cout << "Логин прошёл верификацию\n";
 	else
 
@@ -139,7 +139,7 @@ bool Chat::isValidLogin(const std::string& login) const
 {
 	if (login.length() >= 3)
 	{
-		if (!(getUserByLogin(login) == nullptr)) { return false; }
+		
 
 		for (int i{}; i < login.length(); ++i)
 		{
