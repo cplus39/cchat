@@ -282,8 +282,17 @@ void Chat::showUserByIndex()
 	int index;
 	std::cout << "Введите индекс (число): ";
 	std::cin >> index;
+	if (!std::cin.good()) {
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+		std::cout << "Ошибка! Вводите только целочисленные.\n";
+
+		return;
+	}
 	try {
-		std::cout << "\n" << getUserByIndex(index)->getLogin() + "\n\n";
+		std::cout << "\nЛогин: " << getUserByIndex(index)->getLogin() + "\n" << \
+			"\nИмя: " << getUserByIndex(index)->getName() << "\n\n";
 	}
 	catch (OoR& e) {
 		e.Show();
