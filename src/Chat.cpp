@@ -283,7 +283,7 @@ void Chat::showUserByIndex()
 	std::cout << "Введите индекс (число): ";
 	std::cin >> index;
 	try {
-		std::cout << "\n" << getUserByIndex(index)->getLogin() + "\n";
+		std::cout << "\n" << getUserByIndex(index)->getLogin() + "\n\n";
 	}
 	catch (OoR& e) {
 		e.Show();
