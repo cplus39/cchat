@@ -3,6 +3,7 @@
 ## 1. Список участников команды
 - KornilovIgor
 - IsRonnins
+- an.oh
 
 ## 2. Тимлид
 - KornilovIgor
@@ -71,7 +72,7 @@
 KornilovIgor:
 - Разработка структуры классов
 
-IsRonnins:
+IsRonnins, an.oh:
 - Реализация методов
 
 ?
