@@ -4,7 +4,7 @@ void OoR::Show() {
 	std::cout << "Ошибка OutOfRange\n" \
 		<< "Минимальный: 0 - Полученный: " \
 		<< this->_index_get << " - " \
-		<< "Максимальный: " << this->_index_max << "\n";
+		<< "Максимальный: " << this->_index_max - 1 << "\n";
 }
 
 void Chat::run()
@@ -283,7 +283,7 @@ void Chat::showUserByIndex()
 	std::cout << "Введите индекс (число): ";
 	std::cin >> index;
 	try {
-		std::cout << "\n" << getUserByIndex(index);
+		std::cout << "\n" << getUserByIndex(index)->getLogin() + "\n";
 	}
 	catch (OoR& e) {
 		e.Show();
