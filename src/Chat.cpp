@@ -130,9 +130,10 @@ void Chat::signUp()
 	menuMain();
 }
 
-void Chat::signIn()
+void Chat::signIn()  // Функция входа в уже существующего пользователя.
 {
-	std::string newPassword, newName;
+	// Смена пароля - функция void/bool changePassword()
+	/* std::string newPassword
 	std::cout << "Введите новый Пароль:\n" << ">>";
 	std::getline(std::cin >> std::ws, newPassword);
 
@@ -143,10 +144,14 @@ void Chat::signIn()
 		std::cout << "Пароль не прошёл верификацию\n";
 		return;
 	}
-	changeUserPassword(newPassword);
-	this->_currentUser = changeUserPassword(newPassword);
-	menuMain();
 
+	changeUserPassword(newPassword);
+	menuMain();
+	*/
+
+	// Смена Имени - функция void/bool changeUserName()
+	/*
+	std::string newName;
 	std::cout << "Введите новое имя:\n" << ">>";
 	std::getline(std::cin >> std::ws, newName);
 
@@ -159,8 +164,7 @@ void Chat::signIn()
 	}
 
 	changeUserName(newName);
-	this->_currentUser = changeUserName(newName);
-	menuMain();
+	menuMain(); */
 }
 
 bool Chat::isValidLogin(const std::string& login) const
@@ -305,14 +309,14 @@ int Chat::inputMenu(int count)
 	return -1;
 }
 
-const std::shared_ptr<User> Chat::changeUserPassword(const std::string& newPassword)
+void Chat::changeUserPassword(const std::string& newPassword)
 {
-	return std::shared_ptr<User>();
+	this->_currentUser->setNewPassword(newPassword);
 }
 
-const std::shared_ptr<User> Chat::changeUserName(const std::string& newName)
+void Chat::changeUserName(const std::string& newName)
 {
-	return std::shared_ptr<User>();
+	this->_currentUser->setNewName(newName);
 }
 
 void Chat::showUserByIndex()

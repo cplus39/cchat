@@ -24,8 +24,8 @@ class Chat
 
 	const std::shared_ptr<User> getUserByLogin(const std::string& login) const;
 	const std::shared_ptr<User> getUserByIndex(const int index) const noexcept(false);
-	const std::shared_ptr<User> changeUserName(const std::string& newName);
-	const std::shared_ptr<User> changeUserPassword(const std::string& newPassword);
+	void changeUserName(const std::string& newName);
+	void changeUserPassword(const std::string& newPassword);
 	void showUserByIndex();
 
 	void addUser(std::string& login, std::string& password, std::string& name);
