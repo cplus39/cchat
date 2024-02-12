@@ -1,14 +1,15 @@
 #include "User.hpp"
+#include <memory>
 
 
-void User::setPassword(std::string& login)
+void User::setnewPassword(std::string& repassword)
 {
-	// сюда вернёмся потом - когда будет ответ по Check-Valid
+	this->_newPassword = _newPassword;// сюда вернёмся потом - когда будет ответ по Check-Valid
 }
 
-void User::setName(std::string& name)
+void User::setnewName(std::string& rename)
 {
-	// сюда вернёмся потом - когда будет ответ по Check-Valid
+	this->_newName = _newName;// сюда вернёмся потом - когда будет ответ по Check-Valid
 }
 
 std::string const &User::getLogin()
@@ -24,4 +25,14 @@ std::string const& User::getPassword()
 std::string const& User::getName()
 {
 	return this->_name;
+}
+
+std::string const& User::getnewPassword()
+{
+	return this->_newPassword;// TODO: вставьте здесь оператор return
+}
+
+std::string const& User::getnewName()
+{
+	return this->_newName;// TODO: вставьте здесь оператор return
 }

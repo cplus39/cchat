@@ -132,6 +132,35 @@ void Chat::signUp()
 
 void Chat::signIn()
 {
+	std::string newPassword, newName;
+	std::cout << "Введите новый Пароль:\n" << ">>";
+	std::getline(std::cin >> std::ws, newPassword);
+
+	if (isValidPassword(newPassword))
+		std::cout << "Новый пароль прошёл верификацию\n";
+	else
+	{
+		std::cout << "Пароль не прошёл верификацию\n";
+		return;
+	}
+	changeUserPassword(newPassword);
+	this->_currentUser = changeUserPassword(newPassword);
+	menuMain();
+
+	std::cout << "Введите новое имя:\n" << ">>";
+	std::getline(std::cin >> std::ws, newName);
+
+	if (isValidName(newName))
+		std::cout << "Новое имя прошло верификацию\n";
+	else
+	{
+		std::cout << "Имя не прошло верификацию\n";
+		return;
+	}
+
+	changeUserName(newName);
+	this->_currentUser = changeUserName(newName);
+	menuMain();
 }
 
 bool Chat::isValidLogin(const std::string& login) const
@@ -274,6 +303,16 @@ int Chat::inputMenu(int count)
 		std::cout << "Значения больше " << count << " не допускаються.\n";
 	}
 	return -1;
+}
+
+const std::shared_ptr<User> Chat::changeUserPassword(const std::string& newPassword)
+{
+	return std::shared_ptr<User>();
+}
+
+const std::shared_ptr<User> Chat::changeUserName(const std::string& newName)
+{
+	return std::shared_ptr<User>();
 }
 
 void Chat::showUserByIndex()
