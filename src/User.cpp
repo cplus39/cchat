@@ -12,7 +12,7 @@ void User::setNewName(const std::string& rename)
 	this->_name = rename;// сюда вернёмся потом - когда будет ответ по Check-Valid
 }
 
-std::string const &User::getLogin()
+std::string const& User::getLogin()
 {
 	return this->_login;
 }

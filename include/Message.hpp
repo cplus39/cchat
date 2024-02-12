@@ -19,6 +19,6 @@ public:
 
 	const std::shared_ptr<User> getTo() const;
 	const std::shared_ptr<User> getFrom() const;
-	const std::string & getText() const;
+	const std::string& getText() const;
 	
 };

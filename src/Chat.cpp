@@ -78,7 +78,7 @@ const std::shared_ptr<User> Chat::getUserByLogin(const std::string& login) const
 	return nullptr;
 }
 
-void Chat::addUser(std::string& login, std::string& password, std::string& name)
+void Chat::addUser(const std::string& login, const std::string& password, const std::string& name)
 {
 	if (isValidLogin(login) && isValidPassword(password) && isValidName(name)) {
 		this->_users.emplace_back(std::make_shared<User>(login, password, name));
@@ -88,15 +88,6 @@ void Chat::addUser(std::string& login, std::string& password, std::string& name)
 	}
 }
 
-void Chat::oldUser(std::string& login, std::string& password)
-{
-	if (isValidLogin(login) && isValidPassword(password)) {
-		this->_users.emplace_back(std::make_shared<User>(login, password));
-	}
-	else {
-		repeat();
-	}
-}
 
 void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std::string& text)
 {
@@ -110,10 +101,9 @@ void Chat::signUp()
 
 	std::getline(std::cin >> std::ws, login);
 
-	if (isValidLogin(login))
+	if (isValidLogin(login) && (getUserByLogin(login) == nullptr))
 		std::cout << "Логин прошёл верификацию\n";
 	else
-
 	{
 		std::cout << "Логин не прошёл верификацию\n";
 		return;
@@ -149,22 +139,17 @@ void Chat::signUp()
 
 void Chat::signIn()  
 {
-		
 	std::string login, password;
 	std::cout << "Введите логин:\n" << ">>";
 	std::getline(std::cin >> std::ws, login);
 	std::cout << "Введите Пароль:\n" << ">>";
 	std::getline(std::cin >> std::ws, password);
 
-	isValidLogin(login);  
-	getUserByLogin(login);
 	if(!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
 
-	isValidLogin(password);
-	getUserByLogin(login)->getPassword();
-	if(!isValidLogin(password) || !(getUserByLogin(login)->getPassword() == password)) return;
+	if(!isValidPassword(password) || !(getUserByLogin(login)->getPassword() == password)) return;
 
-	//oldUser(login, password);
+
 	this->_currentUser = getUserByLogin(login); 
 	menuMain(); // -> Войти в меню выбора
 	
@@ -176,7 +161,6 @@ bool Chat::isValidLogin(const std::string& login) const
 {
 	if (login.length() >= 3)
 	{
-		if (!(getUserByLogin(login) == nullptr)) { return false; }
 
 		for (int i{}; i < login.length(); ++i)
 		{

@@ -28,8 +28,7 @@ class Chat
 	void changeUserPassword();
 	void showUserByIndex();
 
-	void addUser(std::string& login, std::string& password, std::string& name);
-	void oldUser(std::string& login, std::string& password);
+	void addUser(const std::string& login, const std::string& password, const std::string& name);
 	void addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std::string& text);
 
 	void signUp();
