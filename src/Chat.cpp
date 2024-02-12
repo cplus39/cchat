@@ -309,7 +309,7 @@ const std::shared_ptr<User> Chat::getUserByIndex(const int index) const
 	return this->_users.at(index);
 }
 
-static char* Data_time() {
+static std::string Data_time() {
 	auto now = std::chrono::system_clock::now();
 	std::time_t timestamp = std::chrono::system_clock::to_time_t(now);
 	return std::ctime(&timestamp);
