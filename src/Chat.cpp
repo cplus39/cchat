@@ -130,10 +130,11 @@ void Chat::signUp()
 	menuMain();
 }
 
+
 void Chat::signIn()  // Функция входа в уже существующего пользователя.
 {
 	// Смена пароля - функция void/bool changePassword()
-	/* std::string newPassword
+	/*std::string newPassword;
 	std::cout << "Введите новый Пароль:\n" << ">>";
 	std::getline(std::cin >> std::ws, newPassword);
 
@@ -166,6 +167,7 @@ void Chat::signIn()  // Функция входа в уже существующ
 	changeUserName(newName);
 	menuMain(); */
 }
+
 
 bool Chat::isValidLogin(const std::string& login) const
 
@@ -311,6 +313,21 @@ int Chat::inputMenu(int count)
 
 void Chat::changeUserPassword(const std::string& newPassword)
 {
+	std::string newPassword;
+	std::cout << "Введите новый Пароль:\n" << ">>";
+	std::getline(std::cin >> std::ws, newPassword);
+
+	if (isValidPassword(newPassword))
+		std::cout << "Новый пароль прошёл верификацию\n";
+	else
+	{
+		std::cout << "Пароль не прошёл верификацию\n";
+		return;
+	}
+
+	changeUserPassword(newPassword);
+	menuMain();
+
 	this->_currentUser->setNewPassword(newPassword);
 }
 
