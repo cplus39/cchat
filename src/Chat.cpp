@@ -142,21 +142,24 @@ void Chat::signIn()
 	// ToDo:
 	// Прописать вход в уже существующего пользователя.
 	// (макет кода) использлвать следующие ->
-	/*
-	std::string login, password 
+	
+	std::string login, password;
+	std::cout << "Введите логин:\n" << ">>";
 	std::getline(std::cin >> std::ws, login);
+	std::cout << "Введите Пароль:\n" << ">>";
 	std::getline(std::cin >> std::ws, password);
 
-	isValidLogin(login) // -> проверить логин 
-	getUserByLogin(login) // -> проверить что не nullptr
+	isValidLogin(login); // -> проверить логин 
+	getUserByLogin(login); // -> проверить что не nullptr
 	if(!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
 
-	isValidLogin(password) // -> проверить парроль 
-	getUserByLogin(login)->getPassword() // -> Сверить парроль
+	isValidLogin(password); // -> проверить парроль 
+	getUserByLogin(login)->getPassword(); // -> Сверить парроль
 	if(!isValidLogin(password) || !(getUserByLogin(login)->getPassword() == password)) return;
+
 	this->_currentUser = getUserByLogin(login); // -> Установить текущего пользователя.
-	menuMain(); // -> Войти в меню выбора
-	*/
+	menuStart(); // -> Войти в меню выбора
+	
 }
 
 
