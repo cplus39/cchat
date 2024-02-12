@@ -39,7 +39,7 @@ void Chat::menuMain()
 	while (true)
 	{
 		printUserMenu();
-		int input = inputMenu(4);
+		int input = inputMenu(6);
 		switch (input)
 		{
 		case 1:
@@ -53,6 +53,12 @@ void Chat::menuMain()
 			break;
 		case 4:
 			showUserByIndex();
+			break;
+		case 5:
+			changeUserName();
+			break;
+		case 6:
+			changeUserPassword();
 			break;
 		case 0:
 			_currentUser = nullptr;
@@ -131,41 +137,26 @@ void Chat::signUp()
 }
 
 
-void Chat::signIn()  // Функция входа в уже существующего пользователя.
+void Chat::signIn()  
 {
-	// Смена пароля - функция void/bool changePassword()
-	/*std::string newPassword;
-	std::cout << "Введите новый Пароль:\n" << ">>";
-	std::getline(std::cin >> std::ws, newPassword);
-
-	if (isValidPassword(newPassword))
-		std::cout << "Новый пароль прошёл верификацию\n";
-	else
-	{
-		std::cout << "Пароль не прошёл верификацию\n";
-		return;
-	}
-
-	changeUserPassword(newPassword);
-	menuMain();
-	*/
-
-	// Смена Имени - функция void/bool changeUserName()
+	// ToDo:
+	// Прописать вход в уже существующего пользователя.
+	// (макет кода) использлвать следующие ->
 	/*
-	std::string newName;
-	std::cout << "Введите новое имя:\n" << ">>";
-	std::getline(std::cin >> std::ws, newName);
+	std::string login, password 
+	std::getline(std::cin >> std::ws, login);
+	std::getline(std::cin >> std::ws, password);
 
-	if (isValidName(newName))
-		std::cout << "Новое имя прошло верификацию\n";
-	else
-	{
-		std::cout << "Имя не прошло верификацию\n";
-		return;
-	}
+	isValidLogin(login) // -> проверить логин 
+	getUserByLogin(login) // -> проверить что не nullptr
+	if(!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
 
-	changeUserName(newName);
-	menuMain(); */
+	isValidLogin(password) // -> проверить парроль 
+	getUserByLogin(login)->getPassword() // -> Сверить парроль
+	if(!isValidLogin(password) || !(getUserByLogin(login)->getPassword() == password)) return;
+	this->_currentUser = getUserByLogin(login); // -> Установить текущего пользователя.
+	menuMain(); // -> Войти в меню выбора
+	*/
 }
 
 
@@ -286,6 +277,8 @@ void Chat::printUserMenu()
 		"2: Отправить личное сообщение\n"\
 		"3: Отправить публичное сообщение\n"\
 		"4: Показать пользователя по индексу\n"\
+		"5: Сменить Имя\n"\
+		"6: Сменить Пароль\n"\
 		"0: Выход\n";
 }
 
@@ -311,7 +304,7 @@ int Chat::inputMenu(int count)
 	return -1;
 }
 
-void Chat::changeUserPassword(const std::string& newPassword)
+void Chat::changeUserPassword()
 {
 	std::string newPassword;
 	std::cout << "Введите новый Пароль:\n" << ">>";
@@ -325,14 +318,23 @@ void Chat::changeUserPassword(const std::string& newPassword)
 		return;
 	}
 
-	changeUserPassword(newPassword);
-	menuMain();
-
 	this->_currentUser->setNewPassword(newPassword);
 }
 
-void Chat::changeUserName(const std::string& newName)
+void Chat::changeUserName()
 {
+	std::string newName;
+	std::cout << "Введите новое имя:\n" << ">>";
+	std::getline(std::cin >> std::ws, newName);
+
+	if (isValidName(newName))
+		std::cout << "Новое имя прошло верификацию\n";
+	else
+	{
+		std::cout << "Имя не прошло верификацию\n";
+		return;
+	}
+
 	this->_currentUser->setNewName(newName);
 }
 
