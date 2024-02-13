@@ -2,14 +2,14 @@
 #include <memory>
 
 
-void User::setNewPassword(const std::string& repassword)
+void User::setNewPassword(const std::string& newPassword)
 {
-	this->_password = repassword;// сюда вернёмся потом - когда будет ответ по Check-Valid
+	this->_password = newPassword;// сюда вернёмся потом - когда будет ответ по Check-Valid
 }
 
-void User::setNewName(const std::string& rename)
+void User::setNewName(const std::string& newName)
 {
-	this->_name = rename;// сюда вернёмся потом - когда будет ответ по Check-Valid
+	this->_name = newName;// сюда вернёмся потом - когда будет ответ по Check-Valid
 }
 
 std::string const& User::getLogin()
