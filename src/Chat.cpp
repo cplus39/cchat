@@ -151,7 +151,7 @@ void Chat::signIn()
 
 
 	this->_currentUser = getUserByLogin(login); 
-	menuMain(); // -> Войти в меню выбора
+	menuMain();
 	
 }
 
