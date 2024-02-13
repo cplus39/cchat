@@ -24,14 +24,16 @@ class Chat
 
 	const std::shared_ptr<User> getUserByLogin(const std::string& login) const;
 	const std::shared_ptr<User> getUserByIndex(const int index) const noexcept(false);
+	void changeUserName();
+	void changeUserPassword();
 	void showUserByIndex();
 
-	void addUser(std::string& login, std::string& password, std::string& name);
+	void addUser(const std::string& login, const std::string& password, const std::string& name);
 	void addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std::string& text);
 
 	void signUp();
 	void signIn();
-
+	
 	void showMessages();
 	void printMessage(const std::unique_ptr<Message>& Message) const;
 

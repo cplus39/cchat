@@ -39,7 +39,7 @@ void Chat::menuMain()
 	while (true)
 	{
 		printUserMenu();
-		int input = inputMenu(4);
+		int input = inputMenu(6);
 		switch (input)
 		{
 		case 1:
@@ -53,6 +53,12 @@ void Chat::menuMain()
 			break;
 		case 4:
 			showUserByIndex();
+			break;
+		case 5:
+			changeUserName();
+			break;
+		case 6:
+			changeUserPassword();
 			break;
 		case 0:
 			_currentUser = nullptr;
@@ -72,7 +78,7 @@ const std::shared_ptr<User> Chat::getUserByLogin(const std::string& login) const
 	return nullptr;
 }
 
-void Chat::addUser(std::string& login, std::string& password, std::string& name)
+void Chat::addUser(const std::string& login, const std::string& password, const std::string& name)
 {
 	if (isValidLogin(login) && isValidPassword(password) && isValidName(name)) {
 		this->_users.emplace_back(std::make_shared<User>(login, password, name));
@@ -81,6 +87,7 @@ void Chat::addUser(std::string& login, std::string& password, std::string& name)
 		repeat();
 	}
 }
+
 
 void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std::string& text)
 {
@@ -94,10 +101,10 @@ void Chat::signUp()
 
 	std::getline(std::cin >> std::ws, login);
 
-	if (isValidLogin(login) && getUserByLogin(login) == nullptr)
+
+	if (isValidLogin(login) && (getUserByLogin(login) == nullptr))
 		std::cout << "Логин прошёл верификацию\n";
 	else
-
 	{
 		std::cout << "Логин не прошёл верификацию\n";
 		return;
@@ -130,17 +137,31 @@ void Chat::signUp()
 	menuMain();
 }
 
-void Chat::signIn()
+
+void Chat::signIn()  
 {
+	std::string login, password;
+	std::cout << "Введите логин:\n" << ">>";
+	std::getline(std::cin >> std::ws, login);
+	std::cout << "Введите Пароль:\n" << ">>";
+	std::getline(std::cin >> std::ws, password);
+
+	if(!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
+
+	if(!isValidPassword(password) || !(getUserByLogin(login)->getPassword() == password)) return;
+
+
+	this->_currentUser = getUserByLogin(login); 
+	menuMain();
+	
 }
+
 
 bool Chat::isValidLogin(const std::string& login) const
 
 {
 	if (login.length() >= 3)
 	{
-		
-
 		for (int i{}; i < login.length(); ++i)
 		{
 			if (login[i] < '0' ||
@@ -251,6 +272,8 @@ void Chat::printUserMenu()
 		"2: Отправить личное сообщение\n"\
 		"3: Отправить публичное сообщение\n"\
 		"4: Показать пользователя по индексу\n"\
+		"5: Сменить Имя\n"\
+		"6: Сменить Пароль\n"\
 		"0: Выход\n";
 }
 
@@ -274,6 +297,40 @@ int Chat::inputMenu(int count)
 		std::cout << "Значения больше " << count << " не допускаються.\n";
 	}
 	return -1;
+}
+
+void Chat::changeUserPassword()
+{
+	std::string newPassword;
+	std::cout << "Введите новый Пароль:\n" << ">>";
+	std::getline(std::cin >> std::ws, newPassword);
+
+	if (isValidPassword(newPassword))
+		std::cout << "Новый пароль прошёл верификацию\n";
+	else
+	{
+		std::cout << "Пароль не прошёл верификацию\n";
+		return;
+	}
+
+	this->_currentUser->setNewPassword(newPassword);
+}
+
+void Chat::changeUserName()
+{
+	std::string newName;
+	std::cout << "Введите новое имя:\n" << ">>";
+	std::getline(std::cin >> std::ws, newName);
+
+	if (isValidName(newName))
+		std::cout << "Новое имя прошло верификацию\n";
+	else
+	{
+		std::cout << "Имя не прошло верификацию\n";
+		return;
+	}
+
+	this->_currentUser->setNewName(newName);
 }
 
 void Chat::showUserByIndex()

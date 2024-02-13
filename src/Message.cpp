@@ -15,3 +15,4 @@ const std::string & Message::getText() const
 {
     return _text;
 }
+
