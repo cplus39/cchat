@@ -101,12 +101,14 @@ void Chat::signUp()
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
 	std::cout << "Введите логин:\n" << ">>";
+	
+
 	std::getline(std::cin >> std::ws, login);
 
 
 	if (isValidLogin(login) && (getUserByLogin(login) == nullptr))
-		std::cout << "\n" << "*** *** ***" << "\n" << "Логин прошёл верификацию\n" << "\n";
 
+		std::cout << "Логин прошёл верификацию\n";
 	else
 	{
 		std::cout << "\n" << "*** *** ***" << "\n" << "Логин не прошёл верификацию\n" << "\n";
@@ -151,6 +153,7 @@ void Chat::signIn()
 	std::string login, password;
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
+	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "Введите логин:\n" << ">>";
 	std::getline(std::cin >> std::ws, login);
   
@@ -161,6 +164,7 @@ void Chat::signIn()
 
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
+	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "Введите Пароль:\n" << ">>";
 	std::getline(std::cin >> std::ws, password);
 
@@ -281,7 +285,7 @@ void Chat::sendPublicMessage()
 
 void Chat::printStartMenu()
 {
-	std::cout << "Выбор пункта:\n" \
+	std::cout << "Выбор пункта:\n"\
 		"\n"\
 		"*** *** ***\n"\
 		"1: Войти\n" \
@@ -292,7 +296,7 @@ void Chat::printStartMenu()
 
 void Chat::printUserMenu()
 {
-	std::cout << "Выбор пункта:\n" \
+	std::cout << "Выбор пункта:\n"\
 		"\n"\
 		"*** *** ***\n"\
 		"1: Показать сообщения\n" \
