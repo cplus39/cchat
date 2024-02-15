@@ -98,12 +98,16 @@ void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std:
 void Chat::signUp()
 {
 	std::string login, password, name;
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
 	std::cout << "Введите логин:\n" << ">>";
+	
 
 	std::getline(std::cin >> std::ws, login);
 
 
 	if (isValidLogin(login) && (getUserByLogin(login) == nullptr))
+
 		std::cout << "Логин прошёл верификацию\n";
 	else
 	{
@@ -111,6 +115,8 @@ void Chat::signUp()
 		return;
 	}
 
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
 	std::cout << "Введите Пароль:\n" << ">>";
 	std::getline(std::cin >> std::ws, password);
 
@@ -122,6 +128,9 @@ void Chat::signUp()
 		return;
 	}
 
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
+	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "Введите имя:\n" << ">>";
 	std::getline(std::cin >> std::ws, name);
 
@@ -142,12 +151,17 @@ void Chat::signUp()
 void Chat::signIn()  
 {
 	std::string login, password;
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
+	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "Введите логин:\n" << ">>";
 	std::getline(std::cin >> std::ws, login);
 
 	if (!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
 
-
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
+	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "Введите Пароль:\n" << ">>";
 	std::getline(std::cin >> std::ws, password);
 
@@ -240,6 +254,9 @@ void Chat::sendPrivateMessage()
 {
 	std::string login, text;
 
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
+	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "Введите логин получателя: ";
 	std::cin >> login;
 	if (!isValidLogin(login) && getUserByLogin(login) != nullptr) return;
@@ -255,6 +272,9 @@ void Chat::sendPrivateMessage()
 void Chat::sendPublicMessage()
 {
 	std::string text;
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
+	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "\n" << "Введите сообщение:\n";
 	;
 	std::getline(std::cin >> std::ws, text);
@@ -264,22 +284,28 @@ void Chat::sendPublicMessage()
 
 void Chat::printStartMenu()
 {
-	std::cout << "Выбор пункта:\n" \
+	std::cout << "Выбор пункта:\n"\
+		"\n"\
+		"*** *** ***\n"\
 		"1: Войти\n" \
 		"2: Регистрация\n"\
-		"0: Выход\n";
+		"0: Выход\n"\
+		"*** *** ***\n";
 }
 
 void Chat::printUserMenu()
 {
-	std::cout << "Выбор пункта:\n" \
+	std::cout << "Выбор пункта:\n"\
+		"\n"\
+		"*** *** ***\n"\
 		"1: Показать сообщения\n" \
 		"2: Отправить личное сообщение\n"\
 		"3: Отправить публичное сообщение\n"\
 		"4: Показать пользователя по индексу\n"\
 		"5: Сменить Имя\n"\
 		"6: Сменить Пароль\n"\
-		"0: Выход\n";
+		"0: Выход\n"\
+		"*** *** ***\n";
 }
 
 int Chat::inputMenu(int count)
@@ -307,6 +333,8 @@ int Chat::inputMenu(int count)
 void Chat::changeUserPassword()
 {
 	std::string newPassword;
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
 	std::cout << "Введите новый Пароль:\n" << ">>";
 	std::getline(std::cin >> std::ws, newPassword);
 
@@ -324,6 +352,8 @@ void Chat::changeUserPassword()
 void Chat::changeUserName()
 {
 	std::string newName;
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
 	std::cout << "Введите новое имя:\n" << ">>";
 	std::getline(std::cin >> std::ws, newName);
 
