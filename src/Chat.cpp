@@ -1,5 +1,6 @@
 ﻿#include "Chat.hpp"
 
+
 void OoR::Show() {
 	std::cout << "Ошибка OutOfRange\n" \
 		<< "Минимальный: 0 - Полученный: " \
@@ -226,7 +227,8 @@ void Chat::showMessages()
 
 void Chat::printMessage(const std::unique_ptr<Message>& message) const
 {
-	std::cout << "От кого: " << message->getFrom()->getName() << "\n";
+	std::cout << "\nКогда: "<< message->getTime() << "\n"
+		<< "От кого: " << message->getFrom()->getName() << "\n";
 	std::cout << "Текст сообщения:\n" \
 		<< message->getText() << '\n';
 }
@@ -364,6 +366,8 @@ const std::shared_ptr<User> Chat::getUserByIndex(const int index) const
 	if (index < 0 || index >= this->_users.size()) throw OoR(index, this->_users.size());
 	return this->_users.at(index);
 }
+
+
 
 bool Chat::repeat()
 {

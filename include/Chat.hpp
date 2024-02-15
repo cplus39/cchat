@@ -48,6 +48,7 @@ class Chat
 	bool isValidPassword(const std::string& password) const;
 	bool isValidName(const std::string& name) const;
 
+
 	bool repeat();
 
 public:
