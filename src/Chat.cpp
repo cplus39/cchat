@@ -1,4 +1,6 @@
 ﻿#include "Chat.hpp"
+#include <chrono>
+#include <iomanip>
 
 void OoR::Show() {
 	std::cout << "Ошибка OutOfRange\n" \
@@ -354,6 +356,14 @@ const std::shared_ptr<User> Chat::getUserByIndex(const int index) const
 {
 	if (index < 0 || index >= this->_users.size()) throw OoR(index, this->_users.size());
 	return this->_users.at(index);
+}
+
+static std::string Data_time()
+{
+	std::time_t t = std::time(nullptr);
+	std::tm tm = *std::localtime(&t);
+	std::cout << "ru_RU: " << std::put_time(&tm, "%H %M") << '\n';
+	return std::ctime(&t);
 }
 
 bool Chat::repeat()

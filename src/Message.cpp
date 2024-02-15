@@ -16,3 +16,7 @@ const std::string & Message::getText() const
     return _text;
 }
 
+const std::string& Message::getTime() const
+{
+    return _time;
+}
