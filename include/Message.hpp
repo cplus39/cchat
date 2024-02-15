@@ -19,8 +19,7 @@ class Message
 public:
 	Message(std::shared_ptr<User> to, std::shared_ptr<User> from, const std::string& text):
 	_to(to), _from(from), _text(text), _time(Data_time())
-	{
-	};
+	{};
 
 	const std::shared_ptr<User> getTo() const;
 	const std::shared_ptr<User> getFrom() const;
