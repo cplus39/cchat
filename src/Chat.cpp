@@ -144,11 +144,14 @@ void Chat::signIn()
 	std::string login, password;
 	std::cout << "Введите логин:\n" << ">>";
 	std::getline(std::cin >> std::ws, login);
+
+	if (!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
+
+
 	std::cout << "Введите Пароль:\n" << ">>";
 	std::getline(std::cin >> std::ws, password);
 
-	if(!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
-
+	
 	if(!isValidPassword(password) || !(getUserByLogin(login)->getPassword() == password)) return;
 
 
