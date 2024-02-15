@@ -98,38 +98,44 @@ void Chat::addMessage(std::shared_ptr<User> to, std::shared_ptr<User> from, std:
 void Chat::signUp()
 {
 	std::string login, password, name;
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
 	std::cout << "Введите логин:\n" << ">>";
-
+		
 	std::getline(std::cin >> std::ws, login);
 
 
 	if (isValidLogin(login) && (getUserByLogin(login) == nullptr))
-		std::cout << "Логин прошёл верификацию\n";
+		std::cout << "\n" << "*** *** ***" << "\n" << "Логин прошёл верификацию\n" << "\n";
 	else
 	{
-		std::cout << "Логин не прошёл верификацию\n";
+		std::cout << "\n" << "*** *** ***" << "\n" << "Логин не прошёл верификацию\n" << "\n";
 		return;
 	}
 
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
 	std::cout << "Введите Пароль:\n" << ">>";
 	std::getline(std::cin >> std::ws, password);
 
 	if (isValidPassword(password))
-		std::cout << "Пароль прошёл верификацию\n";
+		std::cout << "\n" << "*** *** ***" << "\n" << "Пароль прошёл верификацию\n" << "\n";
 	else
 	{
-		std::cout << "Пароль не прошёл верификацию\n";
+		std::cout << "\n" << "*** *** ***" << "\n" << "Пароль не прошёл верификацию\n" << "\n";
 		return;
 	}
 
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
 	std::cout << "Введите имя:\n" << ">>";
 	std::getline(std::cin >> std::ws, name);
 
 	if (isValidName(name))
-		std::cout << "Имя прошло верификацию\n";
+		std::cout << "\n" << "*** *** ***" << "\n" << "Имя прошло верификацию\n" << "\n";
 	else
 	{
-		std::cout << "Имя не прошло верификацию\n";
+		std::cout << "\n" << "*** *** ***" << "\n" << "Имя не прошло верификацию\n" << "\n";
 		return;
 	}
 
@@ -142,9 +148,15 @@ void Chat::signUp()
 void Chat::signIn()  
 {
 	std::string login, password;
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
 	std::cout << "Введите логин:\n" << ">>";
+	std::cout << "\n";
 	std::getline(std::cin >> std::ws, login);
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
 	std::cout << "Введите Пароль:\n" << ">>";
+	std::cout << "\n";
 	std::getline(std::cin >> std::ws, password);
 
 	if(!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
@@ -227,10 +239,9 @@ void Chat::showMessages()
 
 void Chat::printMessage(const std::unique_ptr<Message>& message) const
 {
-	std::cout << "\nКогда: "<< message->getTime() << "\n"
-		<< "От кого: " << message->getFrom()->getName() << "\n";
-	std::cout << "Текст сообщения:\n" \
-		<< message->getText() << '\n';
+	std::cout << "\nКогда: " << message->getTime() << "\n";
+	std::cout << "\nОт кого: " << message->getFrom()->getName() << "\n";
+	std::cout << "\nТекст сообщения: " << message->getText() << '\n';
 }
 
 void Chat::sendPrivateMessage()
@@ -253,7 +264,6 @@ void Chat::sendPublicMessage()
 {
 	std::string text;
 	std::cout << "\n" << "Введите сообщение:\n";
-	;
 	std::getline(std::cin >> std::ws, text);
 	text += ('\n');
 	addMessage(nullptr, this->_currentUser, text);
@@ -262,21 +272,27 @@ void Chat::sendPublicMessage()
 void Chat::printStartMenu()
 {
 	std::cout << "Выбор пункта:\n" \
+		"\n"\
+		"*** *** ***\n"\
 		"1: Войти\n" \
 		"2: Регистрация\n"\
-		"0: Выход\n";
+		"0: Выход\n"\
+		"*** *** ***\n";
 }
 
 void Chat::printUserMenu()
 {
 	std::cout << "Выбор пункта:\n" \
+		"\n"\
+		"*** *** ***\n"\
 		"1: Показать сообщения\n" \
 		"2: Отправить личное сообщение\n"\
 		"3: Отправить публичное сообщение\n"\
 		"4: Показать пользователя по индексу\n"\
 		"5: Сменить Имя\n"\
 		"6: Сменить Пароль\n"\
-		"0: Выход\n";
+		"0: Выход\n"\
+		"*** *** ***\n";
 }
 
 int Chat::inputMenu(int count)
@@ -286,7 +302,8 @@ int Chat::inputMenu(int count)
 	if (!std::cin.good()) {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
+		std::cout << "\n";
+		std::cout << "*** *** ***\n";
 		std::cout << "Ошибка! Вводите только целочисленные.\n";
 
 		return -1;
@@ -304,14 +321,18 @@ int Chat::inputMenu(int count)
 void Chat::changeUserPassword()
 {
 	std::string newPassword;
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
 	std::cout << "Введите новый Пароль:\n" << ">>";
 	std::getline(std::cin >> std::ws, newPassword);
 
 	if (isValidPassword(newPassword))
-		std::cout << "Новый пароль прошёл верификацию\n";
+		
+		std::cout << "\n" << "*** *** ***" << "\n" << "Новый пароль прошёл верификацию\n" << "\n" <<"*** *** ***" << "\n";
+		
 	else
 	{
-		std::cout << "Пароль не прошёл верификацию\n";
+		std::cout << "\n" << "*** *** ***" << "\n" << "Новый пароль не прошёл верификацию\n" << "\n" << "*** *** ***" << "\n";
 		return;
 	}
 
@@ -321,14 +342,16 @@ void Chat::changeUserPassword()
 void Chat::changeUserName()
 {
 	std::string newName;
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
 	std::cout << "Введите новое имя:\n" << ">>";
 	std::getline(std::cin >> std::ws, newName);
 
 	if (isValidName(newName))
-		std::cout << "Новое имя прошло верификацию\n";
+		std::cout << "\n" << "*** *** ***" << "\n" << "Новое имя прошло верификацию\n" << "\n" << "*** *** ***" << "\n";
 	else
 	{
-		std::cout << "Имя не прошло верификацию\n";
+		std::cout << "\n" << "*** *** ***" << "\n" "Новое имя не прошло верификацию\n" << "\n" << "*** *** ***" << "\n";
 		return;
 	}
 
@@ -339,12 +362,15 @@ void Chat::showUserByIndex()
 {
 
 	int index;
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
 	std::cout << "Введите индекс (число): ";
 	std::cin >> index;
 	if (!std::cin.good()) {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
+		std::cout << "\n";
+		std::cout << "*** *** ***\n";
 		std::cout << "Ошибка! Вводите только целочисленные.\n";
 
 		return;
