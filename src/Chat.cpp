@@ -259,9 +259,7 @@ void Chat::sendPrivateMessage()
 	std::cout << "Введите логин получателя: ";
 	std::cin >> login;
 	if (!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
-	std::cout << "\n" << "Введите сообщение:\n";
-
-	;
+	std::cout << "\n" << "Введите сообщение:\n" << ">>";
 	std::getline(std::cin >> std::ws, text);
 	text += ('\n');
 
@@ -273,7 +271,7 @@ void Chat::sendPublicMessage()
 	std::string text;
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
-	std::cout << "\n" << "Введите сообщение:\n";
+	std::cout << "\n" << "Введите сообщение:\n" << ">>";
 	std::getline(std::cin >> std::ws, text);
 	text += ('\n');
 	addMessage(nullptr, this->_currentUser, text);
