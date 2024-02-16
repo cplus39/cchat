@@ -101,12 +101,12 @@ void Chat::signUp()
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
 	std::cout << "Введите логин:\n" << ">>";
-		
 	std::getline(std::cin >> std::ws, login);
 
 
 	if (isValidLogin(login) && (getUserByLogin(login) == nullptr))
 		std::cout << "\n" << "*** *** ***" << "\n" << "Логин прошёл верификацию\n" << "\n";
+
 	else
 	{
 		std::cout << "\n" << "*** *** ***" << "\n" << "Логин не прошёл верификацию\n" << "\n";
@@ -128,6 +128,7 @@ void Chat::signUp()
 
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
+	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "Введите имя:\n" << ">>";
 	std::getline(std::cin >> std::ws, name);
 
@@ -153,14 +154,18 @@ void Chat::signIn()
 	std::cout << "Введите логин:\n" << ">>";
 	std::cout << "\n";
 	std::getline(std::cin >> std::ws, login);
+  
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
+
+	if (!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
+
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
 	std::cout << "Введите Пароль:\n" << ">>";
-	std::cout << "\n";
 	std::getline(std::cin >> std::ws, password);
 
-	if(!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
-
+	
 	if(!isValidPassword(password) || !(getUserByLogin(login)->getPassword() == password)) return;
 
 
@@ -248,6 +253,9 @@ void Chat::sendPrivateMessage()
 {
 	std::string login, text;
 
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
+	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "Введите логин получателя: ";
 	std::cin >> login;
 	if (!isValidLogin(login) && getUserByLogin(login) != nullptr) return;
@@ -263,6 +271,9 @@ void Chat::sendPrivateMessage()
 void Chat::sendPublicMessage()
 {
 	std::string text;
+	std::cout << "\n";
+	std::cout << "*** *** ***\n";
+	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "\n" << "Введите сообщение:\n";
 	std::getline(std::cin >> std::ws, text);
 	text += ('\n');
