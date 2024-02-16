@@ -101,7 +101,7 @@ void Chat::signUp()
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
 	std::cout << "Введите логин:\n" << ">>";
-	
+
 
 	std::getline(std::cin >> std::ws, login);
 
@@ -148,15 +148,14 @@ void Chat::signUp()
 }
 
 
-void Chat::signIn()  
+void Chat::signIn()
 {
 	std::string login, password;
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
-	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "Введите логин:\n" << ">>";
 	std::getline(std::cin >> std::ws, login);
-  
+
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
 
@@ -165,16 +164,15 @@ void Chat::signIn()
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
 	std::cout << "Введите Пароль:\n" << ">>";
-	std::cout << "Введите Пароль:\n" << ">>";
 	std::getline(std::cin >> std::ws, password);
 
-	
-	if(!isValidPassword(password) || !(getUserByLogin(login)->getPassword() == password)) return;
+
+	if (!isValidPassword(password) || !(getUserByLogin(login)->getPassword() == password)) return;
 
 
-	this->_currentUser = getUserByLogin(login); 
+	this->_currentUser = getUserByLogin(login);
 	menuMain();
-	
+
 }
 
 
@@ -258,7 +256,6 @@ void Chat::sendPrivateMessage()
 
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
-	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "Введите логин получателя: ";
 	std::cin >> login;
 	if (!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
@@ -276,7 +273,6 @@ void Chat::sendPublicMessage()
 	std::string text;
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
-	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "\n" << "Введите сообщение:\n";
 	std::getline(std::cin >> std::ws, text);
 	text += ('\n');
@@ -341,9 +337,9 @@ void Chat::changeUserPassword()
 	std::getline(std::cin >> std::ws, newPassword);
 
 	if (isValidPassword(newPassword))
-		
-		std::cout << "\n" << "*** *** ***" << "\n" << "Новый пароль прошёл верификацию\n" << "\n" <<"*** *** ***" << "\n";
-		
+
+		std::cout << "\n" << "*** *** ***" << "\n" << "Новый пароль прошёл верификацию\n" << "\n" << "*** *** ***" << "\n";
+
 	else
 	{
 		std::cout << "\n" << "*** *** ***" << "\n" << "Новый пароль не прошёл верификацию\n" << "\n" << "*** *** ***" << "\n";
