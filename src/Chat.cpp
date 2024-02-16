@@ -152,7 +152,6 @@ void Chat::signIn()
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
 	std::cout << "Введите логин:\n" << ">>";
-	std::cout << "\n";
 	std::getline(std::cin >> std::ws, login);
   
 	std::cout << "\n";
@@ -258,7 +257,7 @@ void Chat::sendPrivateMessage()
 	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "Введите логин получателя: ";
 	std::cin >> login;
-	if (!isValidLogin(login) && getUserByLogin(login) != nullptr) return;
+	if (!isValidLogin(login) || getUserByLogin(login) == nullptr) return;
 	std::cout << "\n" << "Введите сообщение:\n";
 
 	;
