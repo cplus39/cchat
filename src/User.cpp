@@ -4,12 +4,12 @@
 
 void User::setNewPassword(const std::string& newPassword)
 {
-	this->_password = newPassword;// сюда вернёмся потом - когда будет ответ по Check-Valid
+	this->_password = newPassword;
 }
 
 void User::setNewName(const std::string& newName)
 {
-	this->_name = newName;// сюда вернёмся потом - когда будет ответ по Check-Valid
+	this->_name = newName;
 }
 
 std::string const& User::getLogin()

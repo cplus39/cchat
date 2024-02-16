@@ -85,7 +85,7 @@ void Chat::addUser(const std::string& login, const std::string& password, const 
 		this->_users.emplace_back(std::make_shared<User>(login, password, name));
 	}
 	else {
-		repeat();
+		return;
 	}
 }
 
@@ -402,8 +402,3 @@ const std::shared_ptr<User> Chat::getUserByIndex(const int index) const
 }
 
 
-
-bool Chat::repeat()
-{
-	return nullptr;
-}
