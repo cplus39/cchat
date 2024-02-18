@@ -1,16 +1,15 @@
 #include "Message.hpp"
 #include "User.hpp"
-#include <chrono>
 
 
 
 const std::string Message::Data_time()
-{
-    auto now = std::chrono::system_clock::now();
-    auto in_time_t = std::chrono::system_clock::to_time_t(now);
-    std::stringstream ss;
-    ss << std::put_time(std::localtime(&in_time_t), "%H:%M");
-    return ss.str();
+{    
+    char buffer[80];
+    std::time_t timestamp = time(NULL);
+    std::strftime(buffer, 80, "%H:%M:%S", localtime(&timestamp));
+    std::string result = buffer;
+    return result;    
 }
 
 
