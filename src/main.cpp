@@ -1,11 +1,9 @@
 #include "Chat.hpp"
 #include <iostream>
-#include <windows.h>
 
 int main()
 {
-	SetConsoleOutputCP(1251);
-	SetConsoleCP(1251);
+	setlocale(LC_ALL, "Russian");
 
 	Chat chat;
 	chat.run();
