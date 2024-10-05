@@ -1,10 +1,9 @@
 #include "User.hpp"
-
-
+#include "sha256.h"
 
 void User::setNewPassword(const std::string& newPassword)
 {
-	this->_password = newPassword;
+	this->_password = sha256(newPassword);
 }
 
 void User::setNewName(const std::string& newName)

@@ -7,4 +7,4 @@ file(GLOB CPPS "src/*.cpp")
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
 
-add_executable(${PROJECT_NAME} ${CPPS})
+add_executable(${PROJECT_NAME} ${CPPS} "include/sha256.h" "src/sha256.cpp")

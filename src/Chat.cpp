@@ -130,7 +130,6 @@ void Chat::signUp()
 
 	std::cout << "\n";
 	std::cout << "*** *** ***\n";
-	std::cout << "Введите Пароль:\n" << ">>";
 	std::cout << "Введите имя:\n" << ">>";
 	std::getline(std::cin >> std::ws, name);
 
@@ -167,7 +166,7 @@ void Chat::signIn()
 	std::getline(std::cin >> std::ws, password);
 
 
-	if (!isValidPassword(password) || !(getUserByLogin(login)->getPassword() == password)) return;
+	if (!isValidPassword(password) || !(getUserByLogin(login)->getPassword() == sha256(password))) return;
 
 
 	this->_currentUser = getUserByLogin(login);
